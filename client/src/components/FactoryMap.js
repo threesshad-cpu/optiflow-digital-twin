@@ -4,8 +4,7 @@ import { OrbitControls, Text, RoundedBox, Environment, Grid } from '@react-three
 import * as THREE from 'three';
 import io from 'socket.io-client';
 
-// Leave empty to connect to the same host serving the page
-const socket = io.connect();
+const socket = io.connect("http://localhost:3001");
 
 // --- ASSETS ---
 const Rack = ({ position }) => (

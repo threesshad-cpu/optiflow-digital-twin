@@ -3,8 +3,8 @@ import io from 'socket.io-client';
 import FactoryMap from './components/FactoryMap';
 import './App.css';
 
-// Leave empty to connect to the same host serving the page
-const socket = io.connect();
+const socket = io.connect("http://localhost:3001");
+
 function App() {
   const [grid, setGrid] = useState([]);
   const [robots, setRobots] = useState([]);
