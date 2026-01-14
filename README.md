@@ -2,7 +2,7 @@
 ## How to Run Locally
 bash
 ```
-git clone https://github.com/USERNAME/REPO_NAME.git
+git clone https://github.com/threesshad-cpu/optiflow-digital-twin.git
 cd project
 npm install
 npm run dev
