@@ -1,0 +1,317 @@
+/* --- 🏗️ GLOBAL CORE --- */
+
+.app-container {
+
+  display: flex;
+
+  height: 100vh;
+
+  width: 100vw;
+
+  background: radial-gradient(circle at center, #0f172a 0%, #020617 100%);
+
+  overflow: hidden;
+
+  user-select: none; /* Prevents accidental text selection during AGV interaction */
+
+}
+
+
+
+/* --- 🖥️ SIDEBAR DASHBOARD --- */
+
+.sidebar {
+
+  width: 450px;
+
+  background: rgba(15, 23, 42, 0.85);
+
+  backdrop-filter: blur(12px);
+
+  border-left: 1px solid rgba(56, 189, 248, 0.2);
+
+  padding: 25px;
+
+  overflow-y: auto;
+
+  z-index: 10;
+
+  display: flex;
+
+  flex-direction: column;
+
+}
+
+/* Update .sidebar to support the sticky bottom chat */
+
+.sidebar {
+
+  display: flex;
+
+  flex-direction: column;
+
+  height: 100vh;
+
+}
+
+
+
+.chat-interface {
+
+  border-top: 1px solid rgba(56, 189, 248, 0.1);
+
+  padding-top: 15px;
+
+  background: transparent;
+
+}
+
+/* Custom Scrollbar for Industrial Feel */
+
+.sidebar::-webkit-scrollbar { width: 5px; }
+
+.sidebar::-webkit-scrollbar-track { background: #020617; }
+
+.sidebar::-webkit-scrollbar-thumb {
+
+  background: #1e293b;
+
+  border-radius: 5px;
+
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover { background: #38bdf8; }
+
+
+
+/* --- 📊 METRICS & GAUGES --- */
+
+.metrics-section {
+
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 15px;
+
+  margin-bottom: 30px;
+
+}
+
+
+
+/* --- 📜 OPERATIONS LOG --- */
+
+.history-log {
+
+  height: 120px;
+
+  background: rgba(2, 6, 23, 0.9);
+
+  border-radius: 8px;
+
+  padding: 12px;
+
+  overflow-y: auto;
+
+  margin-bottom: 25px;
+
+  font-size: 10px;
+
+  border: 1px solid rgba(56, 189, 248, 0.15);
+
+}
+
+
+
+/* --- 🤖 INTERACTIVE UNIT CARDS --- */
+
+.unit-card {
+
+  background: rgba(30, 41, 59, 0.4);
+
+  border: 1px solid rgba(255, 255, 255, 0.05);
+
+  border-radius: 12px;
+
+  padding: 18px;
+
+  margin-bottom: 15px;
+
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+
+}
+
+
+
+.unit-card:hover {
+
+  background: rgba(30, 41, 59, 0.7);
+
+  border-color: rgba(56, 189, 248, 0.5);
+
+  transform: translateX(-4px);
+
+}
+
+
+
+/* 🛠️ SERVICE INTERCEPT PULSE (Maintenance Solver)
+
+ * Replaces hard lockout to show proactive repairs without stopping unit
+
+ */
+
+@keyframes pulse-service {
+
+  0% { border-color: rgba(245, 158, 11, 0.2); background: rgba(30, 41, 59, 0.4); }
+
+  50% { border-color: rgba(245, 158, 11, 0.8); background: rgba(245, 158, 11, 0.05); }
+
+  100% { border-color: rgba(245, 158, 11, 0.2); background: rgba(30, 41, 59, 0.4); }
+
+}
+
+
+
+.unit-card.service-mode {
+
+  animation: pulse-service 2s infinite ease-in-out;
+
+  border-left: 5px solid #f59e0b !important;
+
+}
+
+
+
+/* --- 📉 STAT BAR TRANSITIONS --- */
+
+.stat-bar-container {
+
+  height: 6px;
+
+  background: #020617;
+
+  border-radius: 3px;
+
+  overflow: hidden;
+
+  position: relative;
+
+}
+
+
+
+.stat-bar-fill {
+
+  height: 100%;
+
+  /* 9️⃣ Motion-aware LERP-like transition for bars */
+
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease;
+
+}
+
+
+
+/* --- 🔘 BUTTON EFFECTS --- */
+
+button {
+
+  transition: all 0.2s ease;
+
+  cursor: pointer;
+
+  font-family: 'JetBrains Mono', monospace;
+
+  text-transform: uppercase;
+
+}
+
+
+
+button:hover:not(:disabled) {
+
+  filter: brightness(1.2);
+
+  letter-spacing: 0.5px;
+
+}
+
+
+
+button:active:not(:disabled) {
+
+  transform: scale(0.96);
+
+}
+
+
+
+button:disabled {
+
+  cursor: not-allowed;
+
+  opacity: 0.5;
+
+}
+
+
+
+/* --- 🚦 STATUS ANIMATIONS --- */
+
+
+
+/* 1️⃣1️⃣ Online Pulse */
+
+@keyframes pulse-green {
+
+  0% { opacity: 1; transform: scale(1); }
+
+  50% { opacity: 0.6; transform: scale(0.9); }
+
+  100% { opacity: 1; transform: scale(1); }
+
+}
+
+
+
+.status-dot {
+
+  width: 8px;
+
+  height: 8px;
+
+  border-radius: 50%;
+
+  animation: pulse-green 2s infinite ease-in-out;
+
+}
+
+
+
+/* 5️⃣ Deadlock Alert Pulse */
+
+@keyframes pulse-deadlock {
+
+  0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+
+  70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+
+  100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+
+}
+
+
+
+.alert-deadlock {
+
+  animation: pulse-deadlock 1.5s infinite;
+
+  color: #ef4444 !important;
+
+  font-weight: bold;
+
+}
